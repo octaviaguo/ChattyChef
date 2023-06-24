@@ -39,8 +39,8 @@ python convert_sgd_data.py \
 
 # Merge checkpoints
 python response_generation/utils/merge_checkpoint.py \
-                   --saved_checkpoint \path\to\saved\ckpt\folder \
-                   --output_path \path\to\output_dir\best_checkpoint.pt
+                   --saved_checkpoint /path/to/saved/ckpt/folder \
+                   --output_path /path/to/output_dir/best_checkpoint.pt
 ```
 
 * Generate: Look at script/d3st/generate_d3st.sh for more details
@@ -63,8 +63,8 @@ python convert_cookdial_data.py /path/to/cookdial/dialog_directory
 ```
 # Merge checkpoints
 python response_generation/utils/merge_checkpoint.py \
-                   --saved_checkpoint \path\to\saved\ckpt\folder \
-                   --output_path \path\to\output_dir\best_checkpoint.pt
+                   --saved_checkpoint /path/to/saved/ckpt/folder \
+                   --output_path /path/to/output_dir/best_checkpoint.pt
 ```
 
 * Predicting: To predict intents of ChattyChef test set, see scripts/dst/generate_dst.sh for more details
@@ -87,8 +87,8 @@ Edit path in finetune_gpt.sh before running
 
 # Merge checkpoints
 python utils/merge_checkpoint.py \
-                   --saved_checkpoint \path\to\saved\ckpt\folder \
-                   --output_path \path\to\output_dir\best_checkpoint.pt
+                   --saved_checkpoint /path/to/saved/ckpt/folder \
+                   --output_path /path/to/output_dir/best_checkpoint.pt
 ```
 
 ### Generation

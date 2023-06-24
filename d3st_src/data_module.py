@@ -161,8 +161,8 @@ class DataModule(LightningDataModule):
         all_lm_labels = []
 
         for sample_idx, src, tgt in zip(sample_ids, src_texts, tgt_texts):
-            if src.count('=') == 11:
-                src = src.replace('=', ':')
+            # if src.count('=') == 11:
+            #     src = src.replace('=', ':')
             system_turns = [m.start() for m in re.finditer('\[system\]', src)]
             user_turns = [m.start() for m in re.finditer('\[user\]', src)]
             turns = system_turns + user_turns

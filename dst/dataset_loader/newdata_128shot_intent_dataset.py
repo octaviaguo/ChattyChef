@@ -51,9 +51,9 @@ class Cooking(datasets.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager):
 
-        train_path = '../data/dst/newdata_10shot_intent_dataset/cooking_intent_train.jsonl'
-        validation_path = '../data/dst/newdata_10shot_intent_dataset/cooking_intent_valid.jsonl'
-        test_path = '../data/dst/newdata_10shot_intent_dataset/cooking_intent_test.jsonl'
+        train_path = '../data/dst/newdata_128shot_intent_dataset/cooking_intent_train.jsonl'
+        validation_path = '../data/dst/newdata_128shot_intent_dataset/cooking_intent_valid.jsonl'
+        test_path = '../data/dst/newdata_128shot_intent_dataset/cooking_intent_test.jsonl'
         return [
             datasets.SplitGenerator(name=datasets.Split.TRAIN, gen_kwargs={
                                     "filepath": train_path}),

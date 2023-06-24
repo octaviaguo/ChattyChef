@@ -14,7 +14,60 @@ Install BLEURT by following this instruction <a href="https://github.com/google-
 
 ## User Intent Detection
 
-Todos
+### Train on MultiWOZ 2.2 / SGD
+
+* Download the datasets: <a href="https://github.com/budzianowski/multiwoz"> MultiWOZ 2.2 </a>, <a href="https://github.com/google-research-datasets/dstc8-schema-guided-dialogue/tree/master"> SGD </a>
+* Preprocess
+```
+cd d3st_src
+
+# MultiWOZ 2.2
+python convert_multiwoz_data.py \
+             --input_dir /path/to/downloaded/dataset \
+             --output_dir data/dst/multiwoz_22_intent
+
+# SGD
+python convert_sgd_data.py \
+             --input_dir /path/to/downloaded/dataset \
+             --output_dir data/dst/sgd_intent2             
+```
+* Fine-tuning
+
+```
+# Run the following scripts (look at the script for for details)
+../scripts/d3st/finetune_d3st.sh
+
+# Merge checkpoints
+python response_generation/utils/merge_checkpoint.py \
+                   --saved_checkpoint \path\to\saved\ckpt\folder \
+                   --output_path \path\to\output_dir\best_checkpoint.pt
+```
+
+* Generate: Look at script/d3st/generate_d3st.sh for more details
+
+### Train on CookDial / ChattyChef
+
+* Download the CookDial dataset from <a href="https://github.com/YiweiJiang2015/CookDial"> link </a>
+* Preprocess CookDial
+
+```
+cd dst
+
+python convert_cookdial_data.py /path/to/cookdial/dialog_directory
+```
+
+* Fine-tuning: 
+  - Fine-tune from the scratch: See scripts/dst/finetune_t5dst.sh for more details
+  - Fine-tune from a previous checkpoint (X -> ChattyChef): See scripts/dst/finetune_from_x.sh for more details  
+
+```
+# Merge checkpoints
+python response_generation/utils/merge_checkpoint.py \
+                   --saved_checkpoint \path\to\saved\ckpt\folder \
+                   --output_path \path\to\output_dir\best_checkpoint.pt
+```
+
+* Predicting: To predict intents of ChattyChef test set, see scripts/dst/generate_dst.sh for more details
 
 ## Instruction State Tracking
 

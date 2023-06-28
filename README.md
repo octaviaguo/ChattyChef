@@ -12,6 +12,21 @@ pip install -r requirements.txt
 Install BLEURT by following this instruction <a href="https://github.com/google-research/bleurt#installation"> link </a>
 
 
+## <img src="images/chattychef.png" alt="Icon" width="30px"> ChattyChef Dataset
+
+You can find the processed dataset at `data/cooking_v4`. The dataset is already splitted to train, validation and test. Each line in a file is a data example, which has the following fields:
+* `File`: Name of the file contains this conversation
+* `Index`: Index of the example
+* `Context`: The conversation history
+* `Knowledge`: The grounded recipe of the conversation
+* `Response`: The golden response
+* `Current_step_idx`: Instruction state of the current turn (output of the Instruction State tracking module)
+* `Next_step_idx`: Instruction state of the next turn (output of the Instruction State tracking module)
+* `intents`: User intent of the last user utterance (output of the User Intent Detection module)
+
+The file `data/cooking_v4/cooking_test_gold_intent.jsonl` contains the human-annotated user intents. 
+
+
 ## User Intent Detection
 
 ### Train on MultiWOZ 2.2 / SGD

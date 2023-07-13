@@ -49,6 +49,9 @@ python convert_sgd_data.py \
 * Fine-tuning
 
 ```
+# Create symlink at d3st_src to point to dst/constant
+ln -s absolute_path_to/dst/constant d3st_src
+
 # Run the following scripts (look at the script for for details)
 ../scripts/d3st/finetune_d3st.sh
 
@@ -68,7 +71,7 @@ python response_generation/utils/merge_checkpoint.py \
 ```
 cd dst
 
-python convert_cookdial_data.py /path/to/cookdial/dialog_directory
+python convert_cookdial_data.py CookDialConverter /path/to/cookdial/dialog_directory
 ```
 
 * Fine-tuning: 
@@ -86,7 +89,7 @@ python response_generation/utils/merge_checkpoint.py \
 
 ## Instruction State Tracking
 
-Todos
+Please take a look at `instruction_state_tracking/align.py` for the `WordMatch` and `SentEmb` algorithms.
 
 ## Response generation
 
@@ -127,4 +130,25 @@ python evaluate_cooking.py \
                 --input_file ../../data/cooking_v4/cooking_test.jsonl \
                 --prediction_file predictions/merged_predictions.json \
                 --bleurt_checkpoint /path/to/BLEURT-20
+```
+
+### Citation
+If you use this codebase in your work, please consider citing our paper:
+
+```
+@inproceedings{le-etal-2023-improved,
+    title = "Improved Instruction Ordering in Recipe-Grounded Conversation",
+    author = "Le, Duong  and
+      Guo, Ruohao  and
+      Xu, Wei  and
+      Ritter, Alan",
+    booktitle = "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = jul,
+    year = "2023",
+    address = "Toronto, Canada",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.acl-long.561",
+    pages = "10086--10104",
+    abstract = "In this paper, we study the task of instructional dialogue and focus on the cooking domain. Analyzing the generated output of the GPT-J model, we reveal that the primary challenge for a recipe-grounded dialog system is how to provide the instructions in the correct order. We hypothesize that this is due to the model{'}s lack of understanding of user intent and inability to track the instruction state (i.e., which step was last instructed). Therefore, we propose to explore two auxiliary subtasks, namely User Intent Detection and Instruction State Tracking, to support Response Generation with improved instruction grounding. Experimenting with our newly collected dataset, ChattyChef, shows that incorporating user intent and instruction state information helps the response generation model mitigate the incorrect order issue. Furthermore, to investigate whether ChatGPT has completely solved this task, we analyze its outputs and find that it also makes mistakes (10.7{\%} of the responses), about half of which are out-of-order instructions. We will release ChattyChef to facilitate further research in this area at: https://github.com/octaviaguo/ChattyChef.",
+}
 ```

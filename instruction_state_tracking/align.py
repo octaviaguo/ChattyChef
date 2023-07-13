@@ -1,13 +1,13 @@
 import sys
 sys.path.append('../')
+import os
 import torch
-from src.evaluation.metrics import F1Metric, BleuMetric, JaccardMetric
-from preprocess.downstream_tasks_align import load_data
+from downstream_tasks_align import load_data
+from response_generation.evaluation.metrics import F1Metric, BleuMetric, JaccardMetric
 import argparse
 import json
 from sentence_transformers import SentenceTransformer, util
 from nltk.tokenize import sent_tokenize, word_tokenize
-CACHE_FOLDER = "/srv/nlprx-lab/share5/dminh6/pretrained_models"
 
 
 class AlignModule:
@@ -15,7 +15,7 @@ class AlignModule:
         self.model = None
         self.scorer = scorer
         if sent_embedding:
-            self.model = SentenceTransformer('sentence-transformers/paraphrase-MiniLM-L6-v2', cache_folder=CACHE_FOLDER)
+            self.model = SentenceTransformer('sentence-transformers/paraphrase-MiniLM-L6-v2')
 
     # word overlap alignment
     def align1(self, recipe_steps, conversation, alpha1=0.2, alpha2=0.3):
@@ -45,6 +45,7 @@ class AlignModule:
                     response_idx2step_idx.append(current_step_idx)
         return response_idx2step_idx
 
+    # SentEmbedding alignment
     def align2(self, recipe_steps, conversation, alpha1=0.2, alpha2=0.3):
         current_step_idx = 0
         response_idx2step_idx = []

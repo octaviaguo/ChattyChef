@@ -50,7 +50,7 @@ python convert_sgd_data.py \
 
 ```
 # Create symlink at d3st_src to point to dst/constant
-ln -s absolute_path_to/dst/constant d3st_src
+ln -s absolute_path_to/dst/constant ./
 
 # Run the following scripts (look at the script for for details)
 ../scripts/d3st/finetune_d3st.sh
